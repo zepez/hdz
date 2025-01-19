@@ -7,7 +7,7 @@ import {
 import type { Options } from "~/lib/types";
 
 export const copyFiles = async (
-  options: Pick<Options, "volume" | "output">
+  options: Pick<Options, "volume" | "output">,
 ) => {
   console.log("Action: HDZero Copy Files");
 

@@ -32,7 +32,7 @@ export const removeFiles = async (path: string) => {
     await $`rm -r ${path}/*`;
   } catch (e) {
     console.log(
-      "Unable to remove files. Are there any files in the directory?"
+      "Unable to remove files. Are there any files in the directory?",
     );
   }
 };

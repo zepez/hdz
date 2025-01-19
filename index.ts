@@ -29,7 +29,7 @@ program
 program
   .command("copy-files")
   .description(
-    "Copy all files within a directory in the volume to another directory"
+    "Copy all files within a directory in the volume to another directory",
   )
   .version(pkg.version)
   .option(...opt.volume)
@@ -44,7 +44,7 @@ program
 program
   .command("remove-files")
   .description(
-    "Remove all files within a directory in the volume without deleting the directory itself"
+    "Remove all files within a directory in the volume without deleting the directory itself",
   )
   .version(pkg.version)
   .option(...opt.path)
@@ -66,7 +66,7 @@ program
 program
   .command("ingest")
   .description(
-    "Full pipeline to ingest media. Copy and process files, then clean the SD card"
+    "Full pipeline to ingest media. Copy and process files, then clean the SD card",
   )
   .version(pkg.version)
   .option(...opt.volume)

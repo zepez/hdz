@@ -1,8 +1,8 @@
 # HDZero File Ingestion CLI
 
-This project is intended to automate handling of files on HDZero SD-card, including DVR footage processing. 
+This project is intended to automate handling of files on HDZero SD-card, including DVR footage processing.
 
-```bash
+```
 Usage: hdz [options] [command]
 
 Options:
