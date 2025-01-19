@@ -1,0 +1,22 @@
+{
+  "name": "hdz",
+  "version": "1.0.0",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch ./index.ts",
+    "build": "bun build --compile --target=bun-darwin-arm64 ./index.ts --outfile dist/hdz",
+    "prod": "bun run build && ./dist/hdz"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "commander": "^13.0.0",
+    "inquirer": "^12.3.2",
+    "inquirer-interactive-list-prompt": "^1.0.4"
+  }
+}
