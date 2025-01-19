@@ -14,10 +14,8 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v4
 
-      - name: Set up Bun
-        run: |
-          curl -fsSL https://bun.sh/install | bash
-          echo "::add-path::${HOME}/.bun/bin"
+      - name: Setup bun
+        uses: oven-sh/setup-bun@v2
 
       - name: Install dependencies
         run: bun install
