@@ -5,12 +5,15 @@ import { formatDisk } from "~/lib/actions/format-disk";
 import { copyFiles } from "~/lib/actions/copy-files";
 import { removeFiles } from "~/lib/actions/remove-files";
 import { processMedia } from "~/lib/actions/process-media";
+import { stitchMedia } from "~/lib/actions/stitch-media";
 
 const opt = {
   name: ["-n, --name <name>", "set disk name", "hdzero"],
   volume: ["-v, --volume <name>", "set volume name", "/Volumes/hdzero"],
   path: ["-p, --path <path>", "set disk path"],
   output: ["-o, --output <path>", "set output path"],
+  stitch: ["-s, --stitch <name>", "stitch all .mp4 files into one"],
+  mute: ["-m, --mute", "mute stitched video"],
 } as const;
 
 /*
@@ -20,7 +23,7 @@ program
   .command("format-disk")
   .description("Rename and format SD card as MS-DOS")
   .version(pkg.version)
-  .option(...opt.name)
+  .requiredOption(...opt.name)
   .action(formatDisk);
 
 /*
@@ -32,8 +35,8 @@ program
     "Copy all files within a directory in the volume to another directory",
   )
   .version(pkg.version)
-  .option(...opt.volume)
-  .option(...opt.output)
+  .requiredOption(...opt.volume)
+  .requiredOption(...opt.output)
   .action(async (opt) => {
     await copyFiles(opt);
   });
@@ -47,7 +50,7 @@ program
     "Remove all files within a directory in the volume without deleting the directory itself",
   )
   .version(pkg.version)
-  .option(...opt.path)
+  .requiredOption(...opt.path)
   .action(removeFiles);
 
 /*
@@ -57,8 +60,20 @@ program
   .command("process-media")
   .description("Convert .ts to .mp4 and remove all other files")
   .version(pkg.version)
-  .option(...opt.path)
+  .requiredOption(...opt.path)
   .action(processMedia);
+
+/*
+ * Stitch Media
+ */
+program
+  .command("stitch-media")
+  .description("Stitch .mp4 files into a single compilation")
+  .version(pkg.version)
+  .requiredOption(...opt.path)
+  .requiredOption(...opt.stitch)
+  .option(...opt.mute)
+  .action(stitchMedia);
 
 /*
  * Ingest Pipeline
@@ -70,6 +85,8 @@ program
   )
   .version(pkg.version)
   .option(...opt.volume)
+  .option(...opt.stitch)
+  .option(...opt.mute)
   .requiredOption(...opt.output)
   .action(async (options: Options) => {
     const files = await copyFiles(options);
@@ -79,6 +96,14 @@ program
     }
 
     await processMedia({ path: options.output });
+
+    if (options.stitch) {
+      await stitchMedia({
+        path: options.output,
+        stitch: options.stitch,
+        mute: options.mute,
+      });
+    }
   });
 
 program.parse();

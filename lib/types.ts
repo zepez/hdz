@@ -3,4 +3,6 @@ export interface Options {
   volume: string;
   path: string;
   output: string;
+  stitch?: string;
+  mute: boolean;
 }
