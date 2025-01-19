@@ -18,6 +18,7 @@ const opt = {
  */
 program
   .command("format-disk")
+  .description("Rename and format SD card as MS-DOS")
   .version(pkg.version)
   .option(...opt.name)
   .action(formatDisk);
@@ -27,6 +28,9 @@ program
  */
 program
   .command("copy-files")
+  .description(
+    "Copy all files within a directory in the volume to another directory"
+  )
   .version(pkg.version)
   .option(...opt.volume)
   .option(...opt.output)
@@ -39,6 +43,9 @@ program
  */
 program
   .command("remove-files")
+  .description(
+    "Remove all files within a directory in the volume without deleting the directory itself"
+  )
   .version(pkg.version)
   .option(...opt.path)
   .action(removeFiles);
@@ -48,6 +55,7 @@ program
  */
 program
   .command("process-media")
+  .description("Convert .ts to .mp4 and remove all other files")
   .version(pkg.version)
   .option(...opt.path)
   .action(processMedia);
@@ -57,6 +65,9 @@ program
  */
 program
   .command("ingest")
+  .description(
+    "Full pipeline to ingest media. Copy and process files, then clean the SD card"
+  )
   .version(pkg.version)
   .option(...opt.volume)
   .requiredOption(...opt.output)

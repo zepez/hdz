@@ -1,15 +1,18 @@
-# hdz
+# HDZero File Ingestion CLI
 
-To install dependencies:
-
-```bash
-bun install
-```
-
-To run:
+This project is intended to automate handling of files on HDZero SD-card, including DVR footage processing. 
 
 ```bash
-bun run index.ts
-```
+Usage: hdz [options] [command]
 
-This project was created using `bun init` in bun v1.1.45. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+Options:
+  -h, --help               display help for command
+
+Commands:
+  format-disk [options]    Rename and format SD card as MS-DOS
+  copy-files [options]     Copy all files within a directory in the volume to another directory
+  remove-files [options]   Remove all files within a directory in the volume without deleting the directory itself
+  process-media [options]  Convert .ts to .mp4 and remove all other files
+  ingest [options]         Full pipeline to ingest media. Copy and process files, then clean the SD card
+  help [command]           display help for command
+```
